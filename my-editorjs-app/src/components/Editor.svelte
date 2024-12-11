@@ -73,6 +73,13 @@
         Marker: {
           class: ColorPlugin,
           config: {
+            defaultColor: '#FFBF00',
+            type: 'marker',
+            customPicker: true
+          }
+        },
+      }
+    });
   });
 
   onDestroy(() => {
