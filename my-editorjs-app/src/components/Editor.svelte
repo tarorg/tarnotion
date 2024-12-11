@@ -16,15 +16,14 @@
   import Delimiter from '@editorjs/delimiter';
   import InlineCode from '@editorjs/inline-code';
   import SimpleImage from '@editorjs/simple-image';
-
+  import ColorPlugin from 'editorjs-text-color-plugin';
+  import NestedList from '@editorjs/nested-list';
+  import Tooltip from 'editorjs-tooltip';
   import { onMount, onDestroy } from 'svelte';
-
   export let placeholder = 'Tell your story...';
   export let initialData = null;
-
   let editorInstance = null;
   let editorContainer;
-
   onMount(() => {
     editorInstance = new EditorJS({
       holder: editorContainer,
@@ -43,8 +42,8 @@
           class: ImageTool,
           config: {
             endpoints: {
-              byFile: '/uploadFile', // Your backend file uploader endpoint
-              byUrl: '/fetchUrl', // Your endpoint that provides uploading by Url
+              byFile: '/uploadFile',
+              byUrl: '/fetchUrl',
             }
           }
         },
@@ -53,7 +52,7 @@
         linkTool: {
           class: LinkTool,
           config: {
-            endpoint: '/fetchUrl', // Your backend endpoint for url data fetching
+            endpoint: '/fetchUrl',
           }
         },
         raw: RawTool,
@@ -61,10 +60,19 @@
         marker: Marker,
         delimiter: Delimiter,
         inlineCode: InlineCode,
-        simpleImage: SimpleImage
-      },
-      data: initialData,
-    });
+        simpleImage: SimpleImage,
+        Color: {
+          class: ColorPlugin,
+          config: {
+            colorCollections: ['#EC7878','#9C27B0','#673AB7','#3F51B5','#0070FF','#03A9F4','#00BCD4','#4CAF50','#8BC34A','#CDDC39', '#FFEB3B', '#FFC107', '#FF9800', '#FF5722', '#795548', '#9E9E9E', '#607D8B'],
+            defaultColor: '#FF1300',
+            type: 'text',
+            customPicker: true
+          }     
+        },
+        Marker: {
+          class: ColorPlugin,
+          config: {
   });
 
   onDestroy(() => {
